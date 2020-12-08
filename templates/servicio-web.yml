@@ -1,0 +1,12 @@
+{{- define "meiga-web.servicio.data" -}}
+
+name: web-{{ .Release.Name }}
+
+selector: {{ .Values.web.selector | toYaml | nindent 2 }}
+
+ports: {{ .Values.web.ports | toYaml | nindent 2 }}
+
+{{- end -}}
+
+{{ include "ph.service.render" (include "meiga-web.servicio.data" . | fromYaml) }}
+

@@ -1,0 +1,12 @@
+{{- define "meiga-db.servicio.data" -}}
+
+name: db-{{ .Release.Name }}
+
+selector: {{ .Values.db.selector | toYaml | nindent 2 }}
+
+ports: {{ .Values.db.ports | toYaml | nindent 2 }}
+
+{{- end -}}
+
+{{ include "ph.service.render" (include "meiga-db.servicio.data" . | fromYaml) }}
+

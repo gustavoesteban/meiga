@@ -1,0 +1,25 @@
+{{- define "meiga-db.deployment.data" -}}
+
+name: db-{{ .Release.Name }}
+
+labels: {{ .Values.dbb.labels | toYaml | nindent 4 }}
+
+selector: {{ .Values.db.selector | toYaml | nindent 2 }}
+
+replicas: {{ .Values.db.replicas }}
+
+containers:
+  - name: db
+    image: {{ .Values.db.image }}
+    imagePullPolicy: {{.Values.db.imagePullPolicy }}
+    envFrom:
+      configmaps: 
+        - {{.Release.Name}}
+      secrets:
+        - {{.Release.Name}}
+    ports: {{ .Values.db.ports | toYaml | nindent 6 }}
+
+{{- end -}}
+
+{{ include "ph.deployment.render" (include "meiga-db.deployment.data" . | fromYaml) }}
+

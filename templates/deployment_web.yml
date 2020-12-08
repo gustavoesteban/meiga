@@ -1,0 +1,25 @@
+{{- define "meiga-web.deployment.data" -}}
+
+name: web-{{ .Release.Name }}
+
+labels: {{ .Values.web.labels | toYaml | nindent 4 }}
+
+selector: {{ .Values.web.selector | toYaml | nindent 2 }}
+
+replicas: {{ .Values.web.replicas }}
+
+containers:
+  - name: web
+    image: {{ .Values.web.image }}
+    imagePullPolicy: {{.Values.web.imagePullPolicy }}
+    envFrom:
+      configmaps: 
+        - {{.Release.Name}}
+      secrets:
+        - {{.Release.Name}}
+    ports: {{ .Values.web.ports | toYaml | nindent 6 }}
+
+{{- end -}}
+
+{{ include "ph.deployment.render" (include "meiga-web.deployment.data" . | fromYaml) }}
+

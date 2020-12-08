@@ -1,0 +1,6 @@
+configuraciones:
+  CURSO: Docker
+  DOCENTE: Francisco
+  MYSQL_HOST: db
+  MYSQL_DATABASE: meiga
+

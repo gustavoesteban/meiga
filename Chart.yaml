@@ -1,0 +1,12 @@
+apiVersion: v2
+name: meiga
+description: Chart de helm para depligue de la aplicación meiga en Kubernetes
+type: application
+version: 0.0.1
+appVersion: 1.16.0
+
+dependencies:
+  - name: prefapp-helm
+    version: 0.0.1
+    repository: file:///home/g/prefapp-helm
+

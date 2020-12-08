@@ -1,0 +1,10 @@
+{{- define "meiga.configmap.data" -}}
+
+name: {{ .Release.Name }}
+
+data: {{ .Values.configuraciones | toYaml | nindent 2 }}
+
+{{- end -}}
+
+{{ include "ph.configmap.render" (include "meiga.configmap.data" . | fromYaml) }}
+
